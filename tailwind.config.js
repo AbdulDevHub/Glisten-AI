@@ -4,7 +4,7 @@ module.exports = {
     //"./app/**/*.{js,ts,jsx,tsx,mdx}",
     //"./pages/**/*.{js,ts,jsx,tsx,mdx}",
     //"./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
+
     // Or if using `src` directory:
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,10 +13,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['var(--font-dm-sans)']
-      }
+        sans: ["var(--font-dm-sans)"],
+      },
     },
   },
-  plugins: [],
-}
-
+  plugins: [require("@tailwindcss/typography")],
+};
