@@ -103,6 +103,7 @@ export type CaseStudyDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | CaseStudiesSlice
   | ShowcaseSlice
   | BentoSlice
   | HeroSlice
@@ -383,6 +384,46 @@ type BentoSliceVariation = BentoSliceDefault;
 export type BentoSlice = prismic.SharedSlice<"bento", BentoSliceVariation>;
 
 /**
+ * Primary content in *CaseStudies → Primary*
+ */
+export interface CaseStudiesSliceDefaultPrimary {
+  /**
+   * Heading field in *CaseStudies → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Body field in *CaseStudies → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *CaseStudies → Items*
+ */
+export interface CaseStudiesSliceDefaultItem {
+  /**
+   * Case Study field in *CaseStudies → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.items[].case_study
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  case_study: prismic.ContentRelationshipField;
+}
+
+/**
  * Default variation for CaseStudies Slice
  *
  * - **API ID**: `default`
@@ -391,8 +432,8 @@ export type BentoSlice = prismic.SharedSlice<"bento", BentoSliceVariation>;
  */
 export type CaseStudiesSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
-  never
+  Simplify<CaseStudiesSliceDefaultPrimary>,
+  Simplify<CaseStudiesSliceDefaultItem>
 >;
 
 /**
@@ -758,6 +799,8 @@ declare module "@prismicio/client" {
       BentoSliceVariation,
       BentoSliceDefault,
       CaseStudiesSlice,
+      CaseStudiesSliceDefaultPrimary,
+      CaseStudiesSliceDefaultItem,
       CaseStudiesSliceVariation,
       CaseStudiesSliceDefault,
       HeroSlice,
