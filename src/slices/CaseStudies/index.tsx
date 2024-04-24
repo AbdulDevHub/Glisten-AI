@@ -57,7 +57,6 @@ const CaseStudies = async ({
                   <h3 className="text-4xl">
                     <PrismicText field={caseStudy.data.company} />
                   </h3>
-
                   <div className="max-w-md">
                     <PrismicRichText field={caseStudy.data.description} />
                   </div>
@@ -70,10 +69,10 @@ const CaseStudies = async ({
                     study
                   </PrismicNextLink>
                 </div>
-
                 <PrismicNextImage
                   field={caseStudy.data.logo_image}
                   quality={100}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className={clsx(
                     "rounded-xl lg:col-span-2",
                     index % 2 && "md:-order-1",
