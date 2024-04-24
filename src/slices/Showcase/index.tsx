@@ -32,7 +32,7 @@ const Showcase = ({ slice }: ShowcaseProps): JSX.Element => {
         field={slice.primary.heading}
         components={{
           heading2: ({ children }) => (
-            <h2 className="-text-5xl text-balance text-center font-medium md:text-7xl">
+            <h2 className="text-balance text-center text-5xl font-medium md:text-7xl">
               {children}
             </h2>
           ),
