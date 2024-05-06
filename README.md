@@ -1,4 +1,8 @@
-# Prismic + Next.js Minimal TypeScript Starter
+# Glisten AI
+
+<a href="https://glisten-ai-dark.vercel.app/" target="_blank" rel="noreferrer"> 
+  <img height="400" src="./Prismic-Course-Images/Screenshot.png">
+</a>
 
 Want to quickly get started building your own project with [Prismic][prismic], [Next.js][nextjs], and TypeScript? This project includes basic configurations and nothing else. The project includes one Rich Text Slice, a homepage, and a dynamic page.
 
