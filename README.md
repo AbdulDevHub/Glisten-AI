@@ -3,7 +3,7 @@
 This project is a sleek, dark, and modern website built with Next.js 14, GSAP, Prismic, Tailwind, and TypeScript. It's styled in the same vein as Linear, AuthKit, Raycast, Clerk, and many more!
 
 <a href="https://glisten-ai-dark.vercel.app/" target="_blank" rel="noreferrer"> 
-  <img height="400" src="./Prismic-Course-Images/Screenshot.png">k 
+  <img height="400" src="./Prismic-Course-Images/Screenshot.png">
 </a>
 
 ## Tools Used
