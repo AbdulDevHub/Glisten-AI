@@ -15,8 +15,8 @@ Update a phase's status here (and in PROGRESS_TRACKER.md) when it starts or merg
 ## Phases
 | # | Phase | Status | Acceptance |
 |---|---|---|---|
-| 1 | Remove Prismic, upgrade Next/React | Done (PR open) | Homepage pixel-identical (desktop + mobile); no `@prismicio` deps; build has no network fetches |
-| 2 | Marketing site + honest copy | — | Features, Pricing, Docs/FAQ, Changelog, Blog+RSS, About, Contact, Terms/Privacy/Refund; case studies → use-case stories; integrations → "Works with" |
+| 1 | Remove Prismic, upgrade Next/React | Merged (PR #5) | Homepage pixel-identical (desktop + mobile); no `@prismicio` deps; build has no network fetches |
+| 2 | Marketing site + honest copy | Next | Features, Pricing, Docs/FAQ, Changelog, Blog+RSS, About, Contact, Terms/Privacy/Refund; case studies → use-case stories; integrations → "Works with" |
 | 3 | Auth + DB + app shell | — | Sign up/in (magic link, GitHub, Google), `/app` protected, Drizzle migrations applied |
 | 4 | Critic | — | Upload + URL capture → pins + score saved to a project |
 | 5 | Generator | — | Streamed TSX, sandboxed preview, chat iterations, export, "Fix with AI" |
