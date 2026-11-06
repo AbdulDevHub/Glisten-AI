@@ -1,16 +1,26 @@
 import "./globals.css";
-import { DM_Sans } from 'next/font/google'
+import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google";
 
-import { PrismicPreview } from "@prismicio/next";
-import { repositoryName } from "@/prismicio";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { site } from "@/content/site";
 
 const dmSans = DM_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-dm-sans',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-dm-sans",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: site.name,
+  description: site.description,
+  openGraph: {
+    siteName: site.name,
+    images: [{ url: site.ogImage.src, alt: site.ogImage.alt }],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -23,7 +33,6 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );
