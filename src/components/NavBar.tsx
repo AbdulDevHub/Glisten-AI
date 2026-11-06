@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Content, asLink } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import type { NavItem } from "@/content/types";
 import ButtonLink from "@/components/ButtonLink";
 import WordMark from "@/components/WordMark";
 import { MdMenu, MdClose } from "react-icons/md";
@@ -11,10 +10,10 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 type NavBarProps = {
-  settings: Content.SettingsDocument;
+  navigation: NavItem[];
 };
 
-export default function NavBar({ settings }: NavBarProps) {
+export default function NavBar({ navigation }: NavBarProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -56,17 +55,15 @@ export default function NavBar({ settings }: NavBarProps) {
           </button>
 
           <div className="grid justify-items-end gap-8">
-            {settings.data.navigation.map((item) => {
-              if (item.cta_button) {
+            {navigation.map((item) => {
+              if (item.cta) {
                 return (
                   <ButtonLink
                     key={item.label}
-                    field={item.link}
+                    href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={
-                      pathname.includes(asLink(item.link) as string)
-                        ? "page"
-                        : undefined
+                      pathname.includes(item.href) ? "page" : undefined
                     }
                   >
                     {item.label}
@@ -74,36 +71,32 @@ export default function NavBar({ settings }: NavBarProps) {
                 );
               }
               return (
-                <PrismicNextLink
+                <Link
                   key={item.label}
                   className="block px-3 text-3xl first:mt-8"
-                  field={item.link}
+                  href={item.href}
                   onClick={() => setOpen(false)}
                   aria-current={
-                    pathname.includes(asLink(item.link) as string)
-                      ? "page"
-                      : undefined
+                    pathname.includes(item.href) ? "page" : undefined
                   }
                 >
                   {item.label}
-                </PrismicNextLink>
+                </Link>
               );
             })}
           </div>
         </div>
 
         {/* Desktop Nav */}
-        <ul className=" hidden gap-6 md:flex">
-          {settings.data.navigation.map((item) => {
-            if (item.cta_button) {
+        <ul className="hidden gap-6 md:flex">
+          {navigation.map((item) => {
+            if (item.cta) {
               return (
                 <li key={item.label}>
                   <ButtonLink
-                    field={item.link}
+                    href={item.href}
                     aria-current={
-                      pathname.includes(asLink(item.link) as string)
-                        ? "page"
-                        : undefined
+                      pathname.includes(item.href) ? "page" : undefined
                     }
                   >
                     {item.label}
@@ -114,17 +107,15 @@ export default function NavBar({ settings }: NavBarProps) {
 
             return (
               <li key={item.label}>
-                <PrismicNextLink
-                  field={item.link}
+                <Link
+                  href={item.href}
                   className="inline-flex min-h-11 items-center"
                   aria-current={
-                    pathname.includes(asLink(item.link) as string)
-                      ? "page"
-                      : undefined
+                    pathname.includes(item.href) ? "page" : undefined
                   }
                 >
                   {item.label}
-                </PrismicNextLink>
+                </Link>
               </li>
             );
           })}

@@ -1,67 +1,59 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PrismicText, SliceZone } from "@prismicio/react";
 
-import { createClient } from "@/prismicio";
-import { components } from "@/slices";
 import Bounded from "@/components/Bounded";
 import StarGrid from "@/components/StarGrid";
-import { PrismicNextImage } from "@prismicio/next";
-import { asText } from "@prismicio/client";
+import { caseStudies, getCaseStudy } from "@/content/case-studies";
+import RichText from "@/slices/RichText";
 
-type Params = { uid: string };
+type Props = { params: Promise<{ uid: string }> };
 
-export default async function Page({ params }: { params: Params }) {
-  const client = createClient();
-  const page = await client
-    .getByUID("case_study", params.uid)
-    .catch(() => notFound());
+export default async function CaseStudyPage({ params }: Props) {
+  const { uid } = await params;
+  const page = getCaseStudy(uid);
+  if (!page) notFound();
 
   return (
     <Bounded as="article">
       <div className="relative grid place-items-center text-center">
         <StarGrid />
         <h1 className="text-7xl font-medium">
-          <PrismicText field={page.data.company} />
-          <p className="text-lg text-yellow-500">Case Study</p>
+          {page.company}
+          <span className="block text-lg text-yellow-500">Case Study</span>
         </h1>
         <p className="mb-4 mt-8 max-w-xl text-lg text-slate-300">
-          <PrismicText field={page.data.description} />
+          {page.description}
         </p>
-        <PrismicNextImage
-          field={page.data.logo_image}
+        <Image
+          src={page.image.src}
+          alt={page.image.alt}
+          width={page.image.width}
+          height={page.image.height}
           className="rounded-lg"
           quality={100}
         />
       </div>
       <div className="mx-auto">
-        <SliceZone slices={page.data.slices} components={components} />
+        <RichText>{page.body}</RichText>
       </div>
     </Bounded>
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> {
-  const client = createClient();
-  const page = await client
-    .getByUID("case_study", params.uid)
-    .catch(() => notFound());
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { uid } = await params;
+  const page = getCaseStudy(uid);
+  if (!page) notFound();
 
   return {
-    title: `${page.data.meta_title || asText(page.data.company) + " Case Study"}`,
-    description: page.data.meta_description,
+    title: page.metaTitle,
+    description: page.metaDescription,
   };
 }
 
-export async function generateStaticParams() {
-  const client = createClient();
-  const pages = await client.getAllByType("case_study");
-
-  return pages.map((page) => {
-    return { uid: page.uid };
-  });
+export function generateStaticParams() {
+  return caseStudies.map((study) => ({ uid: study.uid }));
 }
+
+export const dynamicParams = false;

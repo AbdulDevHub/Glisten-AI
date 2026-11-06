@@ -1,11 +1,10 @@
 import NavBar from "@/components/NavBar";
-import { createClient } from "@/prismicio";
+import { site } from "@/content/site";
 
-export default async function Header() {
-    const client = createClient();
-    const settings = await client.getSingle("settings");
-
-    return (
-        <header><NavBar settings={settings} /></header>
-    )
+export default function Header() {
+  return (
+    <header>
+      <NavBar navigation={site.navigation} />
+    </header>
+  );
 }
