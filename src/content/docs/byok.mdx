@@ -1,0 +1,24 @@
+# Bring your own key
+
+The BYOK plan is free. Instead of buying credits, you add your own API key and pay your AI provider directly for what you use.
+
+## Supported providers
+
+- **Anthropic (Claude):** create a key in the [Anthropic Console](https://console.anthropic.com/).
+- **OpenAI:** create a key in the [OpenAI platform dashboard](https://platform.openai.com/api-keys).
+
+An API key is separate from a Claude.ai or ChatGPT subscription. API usage is billed by the provider per request, and it doesn't touch your chat subscription's limits.
+
+## Adding a key
+
+Open **Settings → API keys**, choose the provider and paste the key. Glisten checks that the key works before saving it.
+
+## How keys are stored
+
+- Keys are encrypted at rest and decrypted only on the server, at the moment a run needs them.
+- Keys are never logged and never sent to your browser after you save them.
+- You can delete a key at any time, and it's removed immediately.
+
+## Keeping costs in check
+
+Set a monthly spend limit in your provider's console. Glisten can't see your provider bill, so the limit is the most reliable way to cap what you spend.

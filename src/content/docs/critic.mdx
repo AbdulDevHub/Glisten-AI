@@ -1,0 +1,33 @@
+# The critic
+
+The critic reviews a user interface the way a design lead would: it looks for concrete problems, marks where they are, and explains how to fix them.
+
+## Inputs
+
+- **Screenshot:** upload a PNG, JPEG or WebP, or paste one from your clipboard.
+- **URL:** Glisten loads the page in a headless browser and captures it at a desktop and a mobile width. The page has to be publicly reachable; pages behind a login can't be captured, so take a screenshot instead.
+
+## What it checks
+
+| Category      | Examples                                                     |
+| ------------- | ------------------------------------------------------------ |
+| Spacing       | Uneven padding, cramped groups, inconsistent gaps            |
+| Alignment     | Elements that almost line up, ragged edges                   |
+| Contrast      | Text below WCAG contrast guidelines, low-visibility controls |
+| Typography    | Too many sizes or weights, long line lengths, weak scale     |
+| Hierarchy     | Competing calls to action, unclear primary content           |
+| Accessibility | Small tap targets, missing focus cues, color-only meaning    |
+
+## Reading the results
+
+Each issue is a **pin** on the image with:
+
+- a **severity** (high, medium or low), so you know what to fix first
+- a short **explanation** of what's wrong and why it matters
+- a **suggested fix** you can apply by hand or send to the generator
+
+The **score** summarizes the whole critique. It's most useful for comparing versions of the same page over time, not for comparing unrelated designs.
+
+## Limits
+
+The critic works from pixels. It can't see hover states, animations or content below the captured area, and like any AI model it can be wrong. Treat each pin as a well-informed suggestion and use your judgment.
