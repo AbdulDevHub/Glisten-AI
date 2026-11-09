@@ -9,22 +9,19 @@ When old log entries stop being useful, fold them into "Earlier history" instead
 ## Current state
 
 - **Phase 1 merged** (PR #5) and live at https://glisten-ai-dark.vercel.app: Next 16 + React 19, Tailwind 3.4, no CMS.
-- Content lives in `src/content/` (`site.ts` nav/meta, `home.tsx` section copy, `case-studies.tsx`, `images.ts`); images in `public/images/`. Slices in `src/slices/*` are presentational and take typed `content` props.
-- Pages: `/`, `/features` (placeholder "Cool Features"), `/case-study/nike` and `/case-study/prismic` (lorem ipsum).
-- Still placeholder or dishonest (phase 2 fixes these): Showcase lorem ipsum; the Features page; the fake Nike/Prismic case studies; integration logos (Cloudflare, npm, GitHub, Figma, DigitalOcean, Fly) that aren't real integrations; the hero image (an email-app mockup); "Download Now"/"Get Started"/"Start Now" buttons that all go to `/features`; duplicate Bento copy ("Benchmark with AI" and "Aesthetic Excellence" share the same text).
+- **Phase 2 built** on branch `phase-2-marketing` (PR pending review/merge): Features, Pricing, Docs (6 MDX pages), Blog (2 posts) + `/blog/rss.xml`, Changelog, About, Contact (+ `/api/contact`), Terms/Privacy/Refunds, `/use-cases` (+3 stories), sitemap and robots. `/case-study/*` redirects (308) to `/use-cases`.
+- Homepage copy rewritten around the critic + generator; layout and slice markup unchanged (only the CaseStudies slice's data source/link text and the Integrations icon set changed). Integrations now show Claude, OpenAI, React, Tailwind, Next.js, Vercel.
+- Still placeholder: the hero, bento and showcase images (email-app mockup, a code snippet that imports `@/prismicio`) and the agency use-case image (a screenshot of the old homepage). Phase 8 replaces them with real app screenshots.
 
 ## In progress
 
-- Nothing. Phase 2 starts in a new session.
+- Phase 2 PR: review, merge, then check the production deploy.
 
-## Next steps (phase 2: marketing site + honest copy, on branch `phase-2-marketing`)
+## Next steps
 
-1. Pick the MDX approach for docs/blog/changelog/legal. Recommended: `@next/mdx` + frontmatter via a small loader, or Velite. Check current docs with context7 first.
-2. Build pages using the homepage building blocks (`context/UI_RULES.md`): Features (reuse Bento/Showcase layouts), Pricing (BYOK $0 / Pro $12 = 200 credits / Team $29 per seat, plus FAQ), Docs + FAQ, Changelog, Blog + RSS, About, Contact (form UI now; Resend wiring needs a key, so ask), Terms / Privacy / Refund.
-3. Honest copy swaps that keep the layouts: case studies → use-case stories (indie dev, agency, design student), integrations → "Works with" (Claude, OpenAI, React, Tailwind, Next.js, Vercel), rewrite the Showcase/Bento/hero copy around the critic + generator. Hero/showcase screenshots get replaced with real app screenshots in phase 8; until then keep the current images but drop the misleading alt text.
-4. Update the nav/footer in `src/content/site.ts` (Features, Pricing, Docs, Blog + "Get Started" CTA → `/pricing` until auth exists).
-5. Verify: `npm run verify`, then screenshots at 1440 and 390 px. The homepage layout must not change, only its copy. Last time this used a Playwright script in the session scratchpad: full-page screenshot of each page after waiting about 6s for the GSAP animations, pixel-compared with `pixelmatch`. Rebuild that if needed.
-6. Run the `reviewer` subagent → PR → merge.
+1. **User to-do before merge:** read the legal pages (`src/content/legal/*.mdx`). They're plain-language drafts with no legal entity, jurisdiction or governing-law clause, and the refund policy's numbers (14 days, under 20 credits) are defaults that need the user's sign-off.
+2. **User to-do:** create `.env.example` by hand (agent permissions block writing `.env*` files) with `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (optional). Add the Resend key + destination email in Vercel to switch the contact form on; until then it answers 503 "not connected yet".
+3. Phase 3 (auth + DB + app shell) on a new branch. Ask the user first for: Neon DB URL, Better Auth secret, GitHub/Google OAuth apps. Move the marketing pages into a `(marketing)` route group when adding `(app)`.
 
 ## Notes for the next session
 
@@ -34,6 +31,10 @@ When old log entries stop being useful, fold them into "Earlier history" instead
 - Working-tree files use CRLF (`core.autocrlf`). Use whole-file writes or normalize `\r\n` before scripted string replacements.
 
 ## Session log
+
+### 2026-11-08
+
+- Phase 2: chose `@next/mdx` (+ `remark-gfm` as a string plugin for Turbopack) with typed TS registries for metadata instead of frontmatter. Built all marketing pages, rewrote homepage copy, swapped fake case studies/integrations for honest ones (use-case images cropped from `Prismic-Course-Images/`). Removed the unearned "Most popular" pricing badge. `npm run verify` passes; screenshots at 1440/390 of 13 pages: all 200, no horizontal overflow, no console errors. Screenshot script: scratchpad `shots.cjs` (Playwright from the global `@playwright/cli`, headless shell 1248 via `executablePath`; set `MSYS_NO_PATHCONV=1` in Git Bash).
 
 ### 2026-11-06
 

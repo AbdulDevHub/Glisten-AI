@@ -9,17 +9,21 @@ It describes the target layout; sections marked (planned) don't exist yet. Updat
 ```
 src/
   app/
-    (marketing)/        public pages: home, features, pricing, docs, blog, changelog, about, contact, legal  (planned)
+    features/ pricing/ docs/[slug] blog/[slug] blog/rss.xml changelog/ use-cases/[slug] about/ contact/
+    terms/ privacy/ refunds/   marketing pages (phase 2); move into a (marketing) group when (app) arrives in phase 3
     (app)/app/          signed-in product: dashboard, projects, critic, generator, settings, billing  (planned)
-    api/                route handlers: auth, ai (critique/generate streams), stripe webhook, capture  (planned)
+    api/                contact (Resend; 503 until env vars are set) · auth, ai, stripe webhook, capture  (planned)
+    sitemap.ts, robots.ts
     layout.tsx          root layout: DM Sans font, Header, Footer, bg #070815, default metadata
     page.tsx            homepage: composes the slices with content from src/content/home.tsx
-    features/, case-study/[uid]/   current placeholder pages (rebuilt in phase 2)
   slices/               homepage sections (Hero, Bento, Showcase, CaseStudies, Integrations, CallToAction, RichText);
                         presentational, each takes typed props from src/content
   components/           shared UI: Bounded, ButtonLink, NavBar, Header, Footer, StarGrid, WordMark
   content/              typed site content: site.ts (nav, meta), home.tsx (section copy), case-studies.tsx,
-                        images.ts (local image registry); MDX collections come in phase 2
+                        images.ts (local image registry),
+                        use-cases.tsx, features.tsx, pricing.ts, changelog.ts, contact.ts, about.mdx,
+                        docs.ts + docs/*.mdx, blog.ts + blog/*.mdx, legal.ts + legal/*.mdx
+  mdx-components.tsx    MDX element overrides (internal links → next/link, scrollable tables)
   hooks/                usePrefersReducedMotion
   lib/                  auth, db (Drizzle), ai (provider adapter), billing, credits, crypto  (planned)
 drizzle/                schema migrations  (planned)
