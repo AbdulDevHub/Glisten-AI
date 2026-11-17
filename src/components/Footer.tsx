@@ -10,8 +10,8 @@ export default function Footer() {
         <span className="sr-only">Glisten.AI Home Page</span>
       </Link>
       <nav aria-label="Footer">
-        <ul className="flex gap-6">
-          {site.navigation.map((item) => (
+        <ul className="flex flex-wrap justify-center gap-x-6">
+          {site.footerNavigation.map((item) => (
             <li key={item.label}>
               <Link
                 href={item.href}

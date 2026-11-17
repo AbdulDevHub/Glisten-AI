@@ -13,21 +13,24 @@ Glisten AI: a dark, animated Next.js marketing site that is becoming a paid SaaS
 
 ## Tech stack
 
-Next.js App Router (TypeScript, `src/` dir, `@/*` → `src/*`) · Tailwind CSS 3.4 + `@tailwindcss/typography` · GSAP + `@gsap/react` · react-icons · clsx.
-Planned: Better Auth, Neon Postgres + Drizzle, Vercel Blob, Stripe, Resend, `@anthropic-ai/sdk` + `openai`, MDX. No CMS (Prismic was removed in phase 1).
+Next.js App Router (TypeScript, `src/` dir, `@/*` → `src/*`) · Tailwind CSS 3.4 + `@tailwindcss/typography` · GSAP + `@gsap/react` · react-icons · clsx · MDX via `@next/mdx` + `remark-gfm` (plugins as strings for Turbopack). Contact form posts to Resend's HTTP API with `fetch` (no SDK).
+Planned: Better Auth, Neon Postgres + Drizzle, Vercel Blob, Stripe, `@anthropic-ai/sdk` + `openai`. No CMS (Prismic was removed in phase 1).
 
 ## Commands
 
 - Install: `npm install`
 - Dev: `npm run dev` · Build: `npm run build` · Lint: `npm run lint` (ESLint flat config) · Types: `npm run typecheck` · Format: `npm run format`
-- Verify: npm run verify
+- Verify: npm run typecheck
+- Verify-full: npm run verify
+- Verify is the fast check the stop hook runs; Verify-full (lint + typecheck + build, minutes) runs before a commit or push.
 
 ## Conventions & constraints
 
 - **Do not change the homepage's look.** Keep the markup, Tailwind classes and GSAP timelines of `src/slices/*` and `src/components/*`; swap only the data source and copy. Visually diff the homepage after touching them.
 - Stay on Tailwind 3.x (v4 would shift the design). Class order comes from `prettier-plugin-tailwindcss`.
 - GSAP animations: `"use client"` components, `useGSAP` with `{ scope: container }`, and always respect `usePrefersReducedMotion`.
-- Content lives in the repo (typed TS in `src/content/`, MDX for long-form). No CMS.
+- Content lives in the repo (typed TS in `src/content/`, MDX for long-form). No CMS. MDX collections (docs, blog, legal) keep metadata in a typed registry (`docs.ts`, `blog.ts`, `legal.ts`) and the body in `src/content/<collection>/<slug>.mdx`; add both when adding a page.
+- The product isn't launched: pages describing planned features show `<Notice />`, and use cases are labelled as examples, not customer stories.
 - Copy must be honest: no fake customer logos, endorsements or integrations we don't support.
 - AI calls: hosted runs use `claude-sonnet-5-5`; "Max quality" uses `claude-opus-5-5`. Debit credits atomically **before** the call and refund on failure. BYOK keys are encrypted at rest and never logged.
 - Work on feature branches with one PR per phase; commits use the gitmoji-commit style.

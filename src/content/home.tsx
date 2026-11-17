@@ -1,7 +1,7 @@
 import Highlight from "@/components/Highlight";
-import { caseStudies } from "./case-studies";
 import { images } from "./images";
 import type { ImageAsset, LinkItem, Rich } from "./types";
+import { useCases } from "./use-cases";
 
 export type HeroContent = {
   heading: string;
@@ -37,11 +37,12 @@ export type ShowcaseContent = {
 export type CaseStudiesContent = {
   heading: string;
   body: Rich;
-  uids: string[];
+  slugs: string[];
 };
 
+/** Tools Glisten actually works with (AI providers and the code it outputs). */
 export type IntegrationIcon =
-  "cloudflare" | "npm" | "github" | "figma" | "digitalocean" | "fly";
+  "claude" | "openai" | "react" | "tailwind" | "nextjs" | "vercel";
 
 export type IntegrationsContent = {
   heading: string;
@@ -56,71 +57,73 @@ export type CallToActionContent = {
 
 export const homeMeta = {
   title: "Glisten.AI",
-  ogTitle: "Glisten.AI - The Design Assistant of the Future",
+  ogTitle: "Glisten.AI - AI design critic and UI generator",
   description:
-    "With Glisten.AI you save hours of time on wireframes, mockups, and final designs.",
+    "Glisten AI critiques your UI screenshots and turns the fixes into clean React and Tailwind code.",
 };
 
 export const hero: HeroContent = {
-  heading: "Designs that shine with dynamic intelligence.",
+  heading: "Designs that shine, reviewed and built by AI.",
   body: (
     <p>
-      The AI features you need to transport your business from the little
-      leagues to the big time.
+      Get a pinned, prioritized critique of any screenshot, then turn the fixes
+      into clean React and Tailwind code.
     </p>
   ),
-  button: { label: "Download Now", href: "/features" },
+  button: { label: "See how it works", href: "/features" },
   image: images.hero,
 };
 
 export const bento: BentoContent = {
   heading: (
     <>
-      The new
+      Your second
       <br />
-      <Highlight>Gold Standard</Highlight>.
+      <Highlight>pair of eyes</Highlight>.
     </>
   ),
   body: (
     <p>
-      Introducing a new way of building components and layouts that leaves
-      everything else in the dust.
+      A critic that spots what&rsquo;s off, and a generator that builds what
+      comes next.
     </p>
   ),
   items: [
     {
-      title: "Endless Ideation",
-      body: <p>Come up with new ideas faster than you can open Photoshop.</p>,
+      title: "Generate from a prompt",
+      body: (
+        <p>Describe a component or page and get a React + Tailwind draft.</p>
+      ),
       image: images.smallScreenshot,
     },
     {
-      title: "Benchmark with AI",
+      title: "Pinned critiques",
       body: (
         <p>
-          Never worry about pixel perfection again, thanks to our patented AI
-          critic, telling you when something is misaligned.
+          Spacing, alignment, contrast, typography and hierarchy issues, pinned
+          right on your screenshot with a severity and a fix.
         </p>
       ),
       image: images.longScreenshot,
       wide: true,
     },
     {
-      title: "Aesthetic Excellence",
+      title: "Fix with AI",
       body: (
         <p>
-          Never worry about pixel perfection again, thanks to our patented AI
-          critic, telling you when something is misaligned.
+          Send a critique to the generator and get revised code that addresses
+          each issue, then keep iterating in chat.
         </p>
       ),
       image: images.longScreenshot,
       wide: true,
     },
     {
-      title: "Pixels Perfected",
+      title: "Bring your own key",
       body: (
         <p>
-          Our features power your next big design, whether it’s a website or an
-          app.
+          Use your own Claude or OpenAI key for free, or pick a plan with hosted
+          credits.
         </p>
       ),
       image: images.smallScreenshot,
@@ -130,45 +133,46 @@ export const bento: BentoContent = {
 
 export const showcase: ShowcaseContent = {
   heading: ["Your Glisten.", "Your workflow."],
-  subheading: <h3>Design the next big thing.</h3>,
+  subheading: <h3>Critique, fix, repeat.</h3>,
   body: (
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Upload a screenshot or paste a URL and Glisten reviews it at desktop and
+      mobile widths, with every issue pinned where it happens.
       <br />
       <br />
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-      aliquip ex ea commodo consequat.
+      When you&rsquo;re happy, export the generated React and Tailwind code or
+      plain HTML and drop it into your project.
     </p>
   ),
   icon: "gear",
-  button: { label: "Get Started", href: "/features" },
+  button: { label: "See pricing", href: "/pricing" },
   image: images.showcase,
 };
 
 export const caseStudiesSection: CaseStudiesContent = {
-  heading: "Designers like you love Glisten",
+  heading: "Built for people who ship UI",
   body: (
     <p>
-      Learn how thousands of designers have used Glisten’s mind-blowing AI
-      features in these case studies.
+      Example workflows for the people Glisten is designed for. These are
+      illustrations, not customer stories.
     </p>
   ),
-  uids: caseStudies.map((study) => study.uid),
+  slugs: useCases.map((useCase) => useCase.slug),
 };
 
 export const integrations: IntegrationsContent = {
-  heading: "Integrations galore.",
+  heading: "Works with your stack.",
   body: (
     <p>
-      The integrations your team needs to be productive at scale with no impact
-      on your burn rate.
+      Bring your own Claude or OpenAI key, and get code that drops straight into
+      React, Tailwind and Next.js projects, ready to deploy on Vercel or
+      anywhere else.
     </p>
   ),
-  icons: ["cloudflare", "npm", "github", "figma", "digitalocean", "fly"],
+  icons: ["claude", "openai", "react", "tailwind", "nextjs", "vercel"],
 };
 
 export const callToAction: CallToActionContent = {
   heading: "AI powered insights for designers",
-  button: { label: "Start Now", href: "/features" },
+  button: { label: "View pricing", href: "/pricing" },
 };

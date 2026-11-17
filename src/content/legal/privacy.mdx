@@ -1,0 +1,50 @@
+This policy explains what data Glisten AI collects, why, and who it's shared with. We collect as little as we can to run the service.
+
+## What we collect
+
+**When you visit this website:** standard server logs (IP address, browser type, pages requested), kept by our hosting provider for security and debugging. This site doesn't use advertising or tracking cookies.
+
+**When you use the contact form:** your name, email address, topic and message. The form emails them to us so we can reply; they aren't stored in a database.
+
+**When you use the app (once it launches; none of this is collected yet):**
+
+- Account details: your email address, your name, and your profile picture if you sign in with GitHub or Google.
+- Your content: uploaded screenshots, URLs you ask us to capture, prompts, critiques, generated code and chat messages.
+- Billing details: your plan, credit balance and payment history. Card details are handled by Stripe and never reach our servers.
+- API keys you add for BYOK, which are encrypted at rest and never logged.
+- Basic usage records (which actions ran and their credit cost) for billing and abuse prevention.
+
+## How we use it
+
+To run the service, process payments, reply to you, keep the service secure, and fix problems. We don't sell your data, we don't use it for advertising, and we don't train AI models on your content.
+
+## Who we share it with
+
+Only the providers needed to run Glisten, each for its own job. Today only Vercel (hosting) and Resend (contact emails) are in use; the rest start when the app launches.
+
+| Provider  | Purpose                                                                   |
+| --------- | ------------------------------------------------------------------------- |
+| Anthropic | Runs critiques and generations (hosted plans, and BYOK with a Claude key) |
+| OpenAI    | Runs critiques and generations when you use an OpenAI key                 |
+| Vercel    | Website and app hosting, and file storage for uploads                     |
+| Neon      | Database                                                                  |
+| Stripe    | Payments and subscriptions                                                |
+| Resend    | Sign-in and contact emails                                                |
+
+We may also disclose data if the law requires it.
+
+## How long we keep it
+
+These commitments apply once the app launches. Your content stays until you delete it or your account. Deleting your account removes your content and keys from our systems within 30 days, apart from billing records we're legally required to keep. Contact-form emails are deleted from our inbox within 12 months.
+
+## Your rights
+
+You can access, export, correct or delete your data. Once the app launches, most of this will be in its settings; until then, and for anything else, use the [contact page](/contact). Depending on where you live, you may also have the right to object to processing or to complain to a data protection authority.
+
+## Security
+
+Data is encrypted in transit (HTTPS) and at rest. API keys get an extra layer of encryption, and access to production systems is limited.
+
+## Changes
+
+We'll update this page when our practices change, and email signed-up users about significant changes.

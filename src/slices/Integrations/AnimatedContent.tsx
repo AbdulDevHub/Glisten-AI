@@ -9,14 +9,14 @@ import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import StylizedLogoMark from "./StylizedLogoMark";
 import clsx from "clsx";
 
+import { RiOpenaiFill } from "react-icons/ri";
 import {
-  FaDigitalOcean,
-  FaCloudflare,
-  FaNpm,
-  FaGithub,
-  FaFigma,
-  FaFly,
-} from "react-icons/fa6";
+  SiClaude,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiVercel,
+} from "react-icons/si";
 
 export default function AnimatedContent({
   icons: items,
@@ -28,12 +28,12 @@ export default function AnimatedContent({
   gsap.registerPlugin(useGSAP);
 
   const icons: Record<IntegrationIcon, React.ReactNode> = {
-    digitalocean: <FaDigitalOcean />,
-    cloudflare: <FaCloudflare />,
-    npm: <FaNpm />,
-    github: <FaGithub />,
-    figma: <FaFigma />,
-    fly: <FaFly />,
+    claude: <SiClaude title="Claude" />,
+    openai: <RiOpenaiFill title="OpenAI" />,
+    react: <SiReact title="React" />,
+    tailwind: <SiTailwindcss title="Tailwind CSS" />,
+    nextjs: <SiNextdotjs title="Next.js" />,
+    vercel: <SiVercel title="Vercel" />,
   };
 
   useGSAP(
