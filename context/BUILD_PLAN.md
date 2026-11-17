@@ -16,8 +16,8 @@ Update a phase's status here (and in PROGRESS_TRACKER.md) when it starts or merg
 | # | Phase | Status | Acceptance |
 |---|---|---|---|
 | 1 | Remove Prismic, upgrade Next/React | Merged (PR #5) | Homepage pixel-identical (desktop + mobile); no `@prismicio` deps; build has no network fetches |
-| 2 | Marketing site + honest copy | In review (branch `phase-2-marketing`) | Features, Pricing, Docs/FAQ, Changelog, Blog+RSS, About, Contact, Terms/Privacy/Refund; case studies → use-case stories; integrations → "Works with" |
-| 3 | Auth + DB + app shell | — | Sign up/in (magic link, GitHub, Google), `/app` protected, Drizzle migrations applied |
+| 2 | Marketing site + honest copy | Merged (PR #6) | Features, Pricing, Docs/FAQ, Changelog, Blog+RSS, About, Contact, Terms/Privacy/Refund; case studies → use-case stories; integrations → "Works with" |
+| 3 | Auth + DB + app shell | In review (branch `phase-3-auth-db`); GitHub/Google wait on OAuth apps | Sign up/in (magic link, GitHub, Google), `/app` protected, Drizzle migrations applied |
 | 4 | Critic | — | Upload + URL capture → pins + score saved to a project |
 | 5 | Generator | — | Streamed TSX, sandboxed preview, chat iterations, export, "Fix with AI" |
 | 6 | Billing, credits, BYOK | — | Stripe Checkout/Portal/webhooks, credit ledger, caps, encrypted BYOK keys |
