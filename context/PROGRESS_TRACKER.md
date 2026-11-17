@@ -20,7 +20,7 @@ When old log entries stop being useful, fold them into "Earlier history" instead
 ## Next steps
 
 1. **User to-do before merge:** read the legal pages (`src/content/legal/*.mdx`). They're plain-language drafts with no legal entity, jurisdiction or governing-law clause, and the refund policy's numbers (14 days, under 20 credits) are defaults that need the user's sign-off.
-2. **User to-do:** create `.env.example` by hand (agent permissions block writing `.env*` files) with `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (optional). Add the Resend key + destination email in Vercel to switch the contact form on; until then it answers 503 "not connected yet".
+2. **User to-do:** `.env.example` is done (committed). Add the Resend key + destination email in Vercel to switch the contact form on; until then it answers 503 "not connected yet".
 3. Phase 3 (auth + DB + app shell) on a new branch. Ask the user first for: Neon DB URL, Better Auth secret, GitHub/Google OAuth apps. Move the marketing pages into a `(marketing)` route group when adding `(app)`.
 
 ## Notes for the next session

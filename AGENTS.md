@@ -20,7 +20,9 @@ Planned: Better Auth, Neon Postgres + Drizzle, Vercel Blob, Stripe, `@anthropic-
 
 - Install: `npm install`
 - Dev: `npm run dev` · Build: `npm run build` · Lint: `npm run lint` (ESLint flat config) · Types: `npm run typecheck` · Format: `npm run format`
-- Verify: npm run verify
+- Verify: npm run typecheck
+- Verify-full: npm run verify
+- Verify is the fast check the stop hook runs; Verify-full (lint + typecheck + build, minutes) runs before a commit or push.
 
 ## Conventions & constraints
 
