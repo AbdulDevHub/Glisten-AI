@@ -2,8 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { site } from "@/content/site";
 
 const dmSans = DM_Sans({
@@ -29,11 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSans.className}>
-      <body className="bg-[#070815] text-white">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body className="bg-[#070815] text-white">{children}</body>
     </html>
   );
 }

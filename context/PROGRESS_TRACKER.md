@@ -8,29 +8,36 @@ When old log entries stop being useful, fold them into "Earlier history" instead
 
 ## Current state
 
-- **Phase 1 merged** (PR #5) and live at https://glisten-ai-dark.vercel.app: Next 16 + React 19, Tailwind 3.4, no CMS.
-- **Phase 2 built** on branch `phase-2-marketing` (PR pending review/merge): Features, Pricing, Docs (6 MDX pages), Blog (2 posts) + `/blog/rss.xml`, Changelog, About, Contact (+ `/api/contact`), Terms/Privacy/Refunds, `/use-cases` (+3 stories), sitemap and robots. `/case-study/*` redirects (308) to `/use-cases`.
-- Homepage copy rewritten around the critic + generator; layout and slice markup unchanged (only the CaseStudies slice's data source/link text and the Integrations icon set changed). Integrations now show Claude, OpenAI, React, Tailwind, Next.js, Vercel.
-- Still placeholder: the hero, bento and showcase images (email-app mockup, a code snippet that imports `@/prismicio`) and the agency use-case image (a screenshot of the old homepage). Phase 8 replaces them with real app screenshots.
+- **Phase 2 merged** (PR #6) and live at https://glisten-ai-dark.vercel.app.
+- **Phase 3 built** on branch `phase-3-auth-db` (PR pending): self-hosted Better Auth 1.7 + Drizzle on Neon. Magic-link sign-in (link printed to the dev server console when `RESEND_API_KEY` is unset; in production it answers "not connected yet"), GitHub/Google buttons appear only when their env vars are set. Migration `drizzle/0000_*.sql` applied to Neon (tables: user, session, account, verification).
+- Marketing pages moved into `src/app/(marketing)` (URLs unchanged; homepage pixel diff vs production ≤0.01%). New `/sign-in` and protected `/app` shell (dashboard, placeholder projects/critic/generator, settings). "Get Started" now points to `/sign-in`.
+- Still placeholder: hero/bento/showcase images and the agency use-case image (phase 8). The 404 page now has no header/footer since the root layout lost the site chrome (phase 8 adds error pages).
 
 ## In progress
 
-- Phase 2 PR: review, merge, then check the production deploy.
+- Phase 3 PR: review, merge, then add the env vars in Vercel and check production sign-in.
 
 ## Next steps
 
-1. **User to-do before merge:** read the legal pages (`src/content/legal/*.mdx`). They're plain-language drafts with no legal entity, jurisdiction or governing-law clause, and the refund policy's numbers (14 days, under 20 credits) are defaults that need the user's sign-off.
-2. **User to-do:** `.env.example` is done (committed). Add the Resend key + destination email in Vercel to switch the contact form on; until then it answers 503 "not connected yet".
-3. Phase 3 (auth + DB + app shell) on a new branch. Ask the user first for: Neon DB URL, Better Auth secret, GitHub/Google OAuth apps. Move the marketing pages into a `(marketing)` route group when adding `(app)`.
+1. **User to-do before merge:** in Vercel, add `DATABASE_URL`, `DATABASE_URL_POOLED`, `BETTER_AUTH_SECRET` (a new one for production), `BETTER_AUTH_URL=https://glisten-ai-dark.vercel.app`. Add `RESEND_API_KEY` for production magic links (`onboarding@resend.dev` only delivers to the Resend account owner until a domain is verified).
+2. **User to-do:** create GitHub and Google OAuth apps (callbacks `<site>/api/auth/callback/github` and `/google`) and add their IDs/secrets locally and in Vercel. Reset the Neon password (it was pasted in chat on 2026-11-17).
+3. **User to-do (from phase 2):** read the legal pages and sign off the refund numbers.
+4. Phase 4 (critic) on a new branch: needs an Anthropic API key (with a Console spend limit) and a Vercel Blob token.
 
 ## Notes for the next session
 
 - Vercel preview URLs are behind Vercel login (they return 302), so preview checks need the user signed in or a protection-bypass token. Verify against the local `next start` build instead.
 - **User to-do:** delete the Prismic webhook (it now 404s on `/api/revalidate`) and any Prismic env vars in Vercel. Before launch, also check for a trademark conflict with the "Glisten" name.
-- Before phase 3, ask the user for: Neon DB URL, Better Auth secret, GitHub/Google OAuth apps.
+- Every page under `/app` that shows user data must call `requireSession()` itself: layouts don't re-run on client navigation, and `src/proxy.ts` only checks that a cookie exists.
+- Screenshots: scratchpad `shots.cjs` signs in through a real magic link by reading the dev log, so run `next dev -p 3000` (port must match `BETTER_AUTH_URL`) with output to `dev.log`; delete `phase3-*@example.com` test users afterwards.
 - Working-tree files use CRLF (`core.autocrlf`). Use whole-file writes or normalize `\r\n` before scripted string replacements.
 
 ## Session log
+
+### 2026-11-17
+
+- Committed `.env.example` + Verify/Verify-full split; opened and merged phase 2 (PR #6); production pages checked (200, `/case-study/*` 308).
+- Phase 3: user chose self-hosted Better Auth over Neon Managed Auth. Wrote the Better Auth schema by hand (the `@better-auth/cli` on npm was 1.4, stale vs 1.7) and checked it against Better Auth's `getAuthTables`. Curl-tested the full flow (redirects, magic link, sign-out, reused token, stale cookie, `next=//evil.com`). Playwright at 1440/390: no overflow, no console errors; fixed a clipped logo and the mobile app nav (now wraps). reviewer-agent: no blockers; documented env vars and made the DB client warn instead of throw when unset.
 
 ### 2026-11-08
 

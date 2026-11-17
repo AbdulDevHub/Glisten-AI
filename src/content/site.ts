@@ -11,13 +11,13 @@ export const site = {
     width: 778,
     height: 454,
   } satisfies ImageAsset,
-  /** Header links. "Get Started" points to pricing until sign-up exists (phase 3). */
+  /** Header links. "Get Started" opens sign-in, which also creates new accounts. */
   navigation: [
     { label: "Features", href: "/features" },
     { label: "Pricing", href: "/pricing" },
     { label: "Docs", href: "/docs" },
     { label: "Blog", href: "/blog" },
-    { label: "Get Started", href: "/pricing", cta: true },
+    { label: "Get Started", href: "/sign-in", cta: true },
   ] satisfies NavItem[],
   footerNavigation: [
     { label: "Features", href: "/features" },
